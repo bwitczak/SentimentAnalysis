@@ -1,3 +1,4 @@
+import type { HFResponse } from '$lib/types/ApiTypes';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
@@ -17,7 +18,7 @@ export const actions: Actions = {
 			return { success: false, error: JSON.stringify(response) };
 		}
 
-		const data = await response.json();
-		return { success: true, data };
+		const data: HFResponse = await response.json();
+		return { success: true, data: data[0][0] };
 	}
 };

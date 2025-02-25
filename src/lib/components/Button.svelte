@@ -1,5 +1,9 @@
 <script lang="ts">
-	let { label, type = 'button' }: { label: string; type: 'button' | 'submit' } = $props();
+	let {
+		label,
+		type = 'button',
+		onClick
+	}: { label: string; type: 'button' | 'submit'; onClick: () => void } = $props();
 </script>
 
-<button {type}>{label}</button>
+<button onclick={onClick} {type}>{label}</button>

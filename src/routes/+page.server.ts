@@ -1,8 +1,23 @@
 import type { Actions } from './$types';
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	default: async ({ request, fetch }) => {
 		const formData = await request.formData();
-		console.log('send', formData);
+		const sentimentText = formData.get('sentiment-text');
+
+		const response = await fetch('/api/sentiment', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(sentimentText)
+		});
+
+		if (!response.ok) {
+			return { success: false, error: JSON.stringify(response) };
+		}
+
+		const data = await response.json();
+		return { success: true, data };
 	}
 };

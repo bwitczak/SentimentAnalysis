@@ -20,21 +20,29 @@
 </script>
 
 <main class="container">
-	<form
-		method="POST"
-		use:enhance={() => {
-			return async ({ result }) => {
-				fetching.isFetching = false;
-				if (result.type === 'success') {
-					await applyAction(result);
-					hfPrediction = result.data?.data as Sentiment;
-				}
-			};
-		}}
-	>
-		<TextArea name="sentiment-text" bind:text />
-		<Button type="submit" label="Analize" isFetching={fetching.isFetching} onClick={getSentiment} />
-	</form>
+	<div class="wrapper">
+		<h1>Sentiment Analyser</h1>
+		<form
+			method="POST"
+			use:enhance={() => {
+				return async ({ result }) => {
+					fetching.isFetching = false;
+					if (result.type === 'success') {
+						await applyAction(result);
+						hfPrediction = result.data?.data as Sentiment;
+					}
+				};
+			}}
+		>
+			<TextArea name="sentiment-text" bind:text />
+			<Button
+				type="submit"
+				label="Analize"
+				isFetching={fetching.isFetching}
+				onClick={getSentiment}
+			/>
+		</form>
+	</div>
 </main>
 
 <Modal closeOnClickOutside={true}>
@@ -55,9 +63,41 @@
 </Modal>
 
 <style lang="scss">
+	:global(body) {
+		margin: 0;
+		padding: 0;
+	}
+
+	.container {
+		display: flex;
+		justify-content: center;
+		height: 100vh;
+		background-color: $background-color;
+
+		& > .wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: $padding-small;
+			padding: $padding-medium;
+
+			& > h1 {
+				margin: 0;
+			}
+
+			& > form {
+				display: grid;
+				gap: $padding-large;
+				border: 2px solid grey;
+				padding: $padding-large;
+				border-radius: 4px;
+			}
+		}
+	}
+
 	.sentiment-evaluation-container {
 		display: grid;
-		gap: 0.75rem;
+		gap: $padding-large;
 		justify-items: center;
 	}
 </style>

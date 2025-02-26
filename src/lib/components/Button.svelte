@@ -17,9 +17,24 @@
 >
 
 <style lang="scss">
-	.fetching {
-		pointer-events: none;
-		background-color: gray;
-		color: white;
+	button {
+		&.fetching {
+			pointer-events: none;
+			background-color: $secondary-color;
+			color: $text-color;
+		}
+
+		& {
+			padding: $padding-small;
+			background-color: $primary-color;
+			color: $text-color;
+			border: $button-border;
+		}
+
+		&:focus {
+			outline: none;
+			border-color: $primary-color;
+			box-shadow: $focus-shadow;
+		}
 	}
 </style>

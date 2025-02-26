@@ -65,7 +65,7 @@
 		inset: 0;
 		width: 100%;
 		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5);
+		background-color: $modal-overlay;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -73,14 +73,14 @@
 		animation: backdrop-fade 0.2s ease-out forwards;
 
 		.modal {
-			background-color: white;
+			background-color: $modal-bg;
 			border-radius: 8px;
 			max-width: 500px;
 			width: 100%;
 			max-height: 90vh;
 			display: flex;
 			flex-direction: column;
-			box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+			box-shadow: 0 5px 20px $modal-shadow;
 			animation: modal-pop 0.3s ease-out forwards;
 			overflow: hidden;
 
@@ -88,9 +88,9 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding: 1rem;
-				border-bottom: 1px solid #eee;
-				background-color: #f9f9f9;
+				padding: $padding-medium;
+				border-bottom: 1px solid $modal-border;
+				background-color: $modal-header-bg;
 
 				h2 {
 					margin: 0;
@@ -108,7 +108,7 @@
 			}
 
 			&-content {
-				padding: 1.25rem;
+				padding: $padding-extra-large;
 				overflow-y: auto;
 				flex-grow: 1;
 			}

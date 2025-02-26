@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import TextArea from '$lib/components/TextArea.svelte';
+	import { evaluateSentiment } from '$lib/logic/BindSentiment';
 	import { fetching } from '$lib/stores/APIStores.svelte';
 	import { modalState } from '$lib/stores/ModalStores.svelte';
-	import type { Sentiment } from '$lib/types/ApiTypes';
+	import type { Sentiment } from '$lib/types/SentimentTypes';
 
 	let text = $state('');
-	let hfPrediction: Sentiment = $state() as Sentiment;
+	let hfPrediction: Sentiment | undefined = $state();
 
 	function getSentiment() {
 		fetching.isFetching = true;
@@ -19,10 +20,11 @@
 	<form
 		method="POST"
 		use:enhance={() => {
-			return ({ result }) => {
+			return async ({ result }) => {
 				fetching.isFetching = false;
 				if (result.type === 'success') {
-					hfPrediction = result.data as Sentiment;
+					await applyAction(result);
+					hfPrediction = result.data?.data as Sentiment;
 					modalState.title = 'Sentiment analysis';
 					modalState.open();
 				}
@@ -41,7 +43,20 @@
 {#if modalState.isOpen}
 	<Modal closeOnClickOutside={true}>
 		{#snippet content()}
-			<pre>{JSON.stringify(hfPrediction, null, 2)}</pre>
+			{@const { icon, message } = evaluateSentiment(hfPrediction)}
+			{@const Icon = icon}
+			<div class="sentiment-evaluation-container">
+				<Icon />
+				<p>{message}</p>
+			</div>
 		{/snippet}
 	</Modal>
 {/if}
+
+<style lang="scss">
+	.sentiment-evaluation-container {
+		display: grid;
+		gap: 0.75rem;
+		justify-items: center;
+	}
+</style>

@@ -1,5 +1,6 @@
 import { HF_ACCESS_TOKEN } from '$env/static/private';
-import type { Sentiment } from '$lib/types/ApiTypes';
+
+import { LabelEnum, type Sentiment } from '$lib/types/SentimentTypes';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
@@ -24,5 +25,9 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
 
 	const data: Sentiment = await hfResposnse.json();
 
-	return json(data, { status: 201 });
+	const label: LabelEnum = Object.values(LabelEnum).includes(data.label as LabelEnum)
+		? (data.label as LabelEnum)
+		: LabelEnum.UNKNOWN;
+
+	return json({ label: label, score: data.score }, { status: 201 });
 };

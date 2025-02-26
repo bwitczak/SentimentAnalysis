@@ -1,12 +1,3 @@
-enum LabelEnum {
-	POSITIVE,
-	NEUTRAL,
-	NEGATIVE
-}
-
-export type Sentiment = {
-	label: LabelEnum;
-	score: number;
-};
+import type { Sentiment } from './SentimentTypes';
 
 export type HFResponse = Sentiment[][];

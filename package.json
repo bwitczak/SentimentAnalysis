@@ -7,7 +7,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
+		"prepare": "svelte-kit sync || echo '' && husky install",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
@@ -23,12 +23,15 @@
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@testing-library/jest-dom": "^6.6.3",
 		"@testing-library/svelte": "^5.2.4",
-		"eslint": "^9.18.0",
+		"eslint": "^9.21.0",
 		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-prettier": "^5.2.3",
 		"eslint-plugin-svelte": "^2.46.1",
 		"globals": "^15.14.0",
+		"husky": "^8.0.0",
 		"jsdom": "^25.0.1",
-		"prettier": "^3.4.2",
+		"lint-staged": "^15.4.3",
+		"prettier": "^3.5.2",
 		"prettier-plugin-svelte": "^3.3.3",
 		"sass-embedded": "^1.85.1",
 		"svelte": "^5.0.0",
@@ -41,6 +44,12 @@
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"esbuild"
+		]
+	},
+	"lint-staged": {
+		"*.{js,ts,html,json,css,scss,md, svelte}": [
+			"prettier --write .",
+			"eslint --fix"
 		]
 	}
 }

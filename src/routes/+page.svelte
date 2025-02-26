@@ -30,6 +30,8 @@
 					if (result.type === 'success') {
 						await applyAction(result);
 						hfPrediction = result.data?.data as Sentiment;
+					} else if (result.type === 'failure' || result.type === 'error') {
+						hfPrediction = undefined;
 					}
 				};
 			}}
@@ -52,11 +54,12 @@
 				<Loader />
 			</div>
 		{:else}
-			{@const { icon, message } = evaluateSentiment(hfPrediction)}
+			{@const { icon, message, proTip } = evaluateSentiment(hfPrediction)}
 			{@const Icon = icon}
 			<div class="sentiment-evaluation-container">
 				<Icon />
 				<p>{message}</p>
+				<p>Pro tip: {proTip}</p>
 			</div>
 		{/if}
 	{/snippet}
@@ -99,5 +102,9 @@
 		display: grid;
 		gap: $padding-large;
 		justify-items: center;
+
+		& > p {
+			margin: 0;
+		}
 	}
 </style>

@@ -30,7 +30,7 @@
 		}}
 	>
 		<TextArea name="sentiment-text" bind:text />
-		<Button type="submit" label="Analize" onClick={getSentiment} />
+		<Button type="submit" label="Analize" isFetching={fetching.isFetching} onClick={getSentiment} />
 	</form>
 
 	{#if fetching.isFetching}

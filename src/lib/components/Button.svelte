@@ -2,8 +2,24 @@
 	let {
 		label,
 		type = 'button',
+		isFetching = false,
 		onClick
-	}: { label: string; type: 'button' | 'submit'; onClick: () => void } = $props();
+	}: {
+		label: string;
+		type: 'button' | 'submit';
+		isFetching: boolean;
+		onClick: () => void;
+	} = $props();
 </script>
 
-<button onclick={onClick} {type}>{label}</button>
+<button onclick={onClick} {type} data-fetching={isFetching} class:fetching={isFetching}
+	>{label}</button
+>
+
+<style lang="scss">
+	.fetching {
+		pointer-events: none;
+		background-color: gray;
+		color: white;
+	}
+</style>

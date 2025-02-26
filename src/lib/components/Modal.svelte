@@ -37,25 +37,27 @@
 	});
 </script>
 
-<div
-	class="modal-backdrop"
-	onclick={handleBackdropClick}
-	onkeydown={handleBackdropKeydown}
-	bind:this={modalContent}
-	tabindex="0"
-	role="button"
-	transition:fade={{ duration: 200 }}
->
-	<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
-		<div class="modal-header">
-			<h2 id="modal-title">{modalState.title}</h2>
-			<button class="close-button" onclick={close} aria-label="Close modal"><Cross /></button>
-		</div>
-		<div class="modal-content">
-			{@render content()}
+{#if modalState.isOpen}
+	<div
+		class="modal-backdrop"
+		onclick={handleBackdropClick}
+		onkeydown={handleBackdropKeydown}
+		bind:this={modalContent}
+		tabindex="0"
+		role="button"
+		transition:fade={{ duration: 200 }}
+	>
+		<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+			<div class="modal-header">
+				<h2 id="modal-title">{modalState.title}</h2>
+				<button class="close-button" onclick={close} aria-label="Close modal"><Cross /></button>
+			</div>
+			<div class="modal-content">
+				{@render content()}
+			</div>
 		</div>
 	</div>
-</div>
+{/if}
 
 <style lang="scss">
 	.modal-backdrop {

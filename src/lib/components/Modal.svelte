@@ -39,6 +39,7 @@
 
 {#if modalState.isOpen}
 	<div
+		data-testid="modal-backdrop"
 		class="modal-backdrop"
 		onclick={handleBackdropClick}
 		onkeydown={handleBackdropKeydown}
@@ -50,9 +51,14 @@
 		<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
 			<div class="modal-header">
 				<h2 id="modal-title">{modalState.title}</h2>
-				<button class="close-button" onclick={close} aria-label="Close modal"><Cross /></button>
+				<button
+					data-testid="modal-close-button"
+					class="close-button"
+					onclick={close}
+					aria-label="Close modal"><Cross /></button
+				>
 			</div>
-			<div class="modal-content">
+			<div data-testid="modal-content" class="modal-content">
 				{@render content()}
 			</div>
 		</div>

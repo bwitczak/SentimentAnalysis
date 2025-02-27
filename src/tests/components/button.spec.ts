@@ -1,13 +1,13 @@
-import TextArea from '$lib/components/TextArea.svelte';
+import Button from '$lib/components/Button.svelte';
 import { cleanup, render } from '@testing-library/svelte';
 import { afterEach, describe, expect, it } from 'vitest';
 
-describe('TextArea.svelte', () => {
+describe('Button.svelte', () => {
 	afterEach(() => cleanup());
 
 	it('Should component render', async () => {
-		const { getByTestId } = render(TextArea);
+		const { getByTestId } = render(Button);
 
-		expect(getByTestId('text-area')).toBeTruthy();
+		expect(getByTestId('button')).toBeTruthy();
 	});
 });

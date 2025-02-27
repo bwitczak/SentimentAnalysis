@@ -1,10 +1,17 @@
 <script lang="ts">
 	let { text = $bindable(''), name }: { text: string; name: string } = $props();
+
+	$effect(() => {
+		if (text.length > 500) {
+			text = text.substring(0, 500);
+		}
+	});
 </script>
 
 <div>
 	<textarea data-testid="text-area" {name} maxlength="500" bind:value={text}></textarea>
-	<span>{text.length}/500</span>
+	<!-- /* v8 ignore next 1 */ -->
+	<span data-testid="text-area-counter">{text.length}/500</span>
 </div>
 
 <style lang="scss">

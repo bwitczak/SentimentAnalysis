@@ -11,7 +11,21 @@ export default defineConfig({
 		}
 	},
 	test: {
-		environment: 'happy-dom'
+		environment: 'happy-dom',
+		coverage: {
+			provider: 'v8',
+			exclude: [
+				'./svelte.config.js',
+				'./eslint.config.js',
+				'./vite.config.ts',
+				'src/app.d.ts',
+				'src/lib/stores/**',
+				'src/lib/icons/**',
+				'src/lib/types/**',
+				'**/node_modules/**',
+				'.svelte-kit/**'
+			]
+		}
 	},
 	resolve: process.env.VITEST
 		? {

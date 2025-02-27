@@ -12,8 +12,12 @@
 	} = $props();
 </script>
 
-<button onclick={onClick} {type} data-fetching={isFetching} class:fetching={isFetching}
-	>{label}</button
+<button
+	data-testid="button"
+	onclick={onClick}
+	{type}
+	data-fetching={isFetching}
+	class:fetching={isFetching}>{label}</button
 >
 
 <style lang="scss">

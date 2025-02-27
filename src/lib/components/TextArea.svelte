@@ -3,7 +3,7 @@
 </script>
 
 <div>
-	<textarea {name} maxlength="500" bind:value={text}></textarea>
+	<textarea data-testid="text-area" {name} maxlength="500" bind:value={text}></textarea>
 	<span>{text.length}/500</span>
 </div>
 

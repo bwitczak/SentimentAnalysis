@@ -5,6 +5,7 @@ This application allows users to analyze the sentiment of text using the Hugging
 ## Technologies Used
 
 - **Svelte 5** with TypeScript for the frontend framework
+- **GraphQL** for fetching data
 - **SCSS** for styling
 - **pnpm** as the package manager
 - **Husky** for Git hooks
@@ -27,12 +28,12 @@ This application allows users to analyze the sentiment of text using the Hugging
    cd SentimentAnalysis
    ```
 
-1.5 (Optional) GraphQL version
+1.5 (Optional) REST version
 
-To get GraphQL version please checkout to `main-graphql`
+To get GraphQL version please checkout to `main`
 
 ```bash
-   git switch main-graphql
+   git switch main
 ```
 
 2. Install dependencies:
@@ -50,9 +51,18 @@ To get GraphQL version please checkout to `main-graphql`
 
    To get Hugging Face API token go to tab “Settings” → “Access Tokens" → "Create new token"
 
+### Run GraphQL server
+
+```
+cd graphql-server
+node server.mjs
+```
+
+The server will be available at `http://localhost:4000/`
+
 ### Running the Application
 
-Start the development server:
+Start the development server. Run inside root folder:
 
 ```bash
 pnpm dev
@@ -62,6 +72,8 @@ The application will be available at `http://localhost:5173/` (or another port i
 
 ### Building for Production
 
+Run inside root folder
+
 ```bash
 pnpm build
 ```
@@ -69,6 +81,8 @@ pnpm build
 The built application will be in the `dist` directory.
 
 ### Running Tests
+
+Run inside root folder
 
 ```bash
 pnpm test
@@ -78,6 +92,8 @@ pnpm test
 
 ```
 /
+├── graphql-server/
+│   ├── server.mjs             # GraphQL server
 ├── src/
 │   ├── lib/
 │   ├── ├── components/        # Reusable Svelte components

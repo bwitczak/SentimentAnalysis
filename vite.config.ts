@@ -3,6 +3,9 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
+	optimizeDeps: {
+		exclude: ['@urql/svelte']
+	},
 	css: {
 		preprocessorOptions: {
 			scss: {
